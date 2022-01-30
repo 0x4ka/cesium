@@ -1,9 +1,13 @@
 // A simple demo of 3D Tiles feature picking with hover and select behavior
 // Building data courtesy of NYC OpenData portal: http://www1.nyc.gov/site/doitt/initiatives/3d-building.page
 
+  Cesium.Ion.defaultAccessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJlMWIzNDVmZi04YjcyLTRmNTgtOTRjNS1jYjE5M2Y1MzU1OTMiLCJpZCI6ODExMTMsImlhdCI6MTY0MzUyNjIwMX0.lpmVoBleVGPbSTTeICXmeFwNsXgv2ypVtU5bmMrrISY";
+
   var viewer = new Cesium.Viewer("cesium");
+  viewer.animation.container.style.visibility = "hidden";
+  viewer.timeline.container.style.visibility = "hidden";
   
-  viewer.scene.globe.depthTestAgainstTerrain = true;
+  //viewer.scene.globe.depthTestAgainstTerrain = true;
   
   // Set the initial camera view to look at Manhattan
   var initialPosition = Cesium.Cartesian3.fromDegrees(
@@ -51,9 +55,9 @@
 
   for (data of datasets){
     viewer.scene.primitives.add(new Cesium.Cesium3DTileset({url:"https://s3-ap-northeast-1.amazonaws.com/3dimension.jp/13000_tokyo-egm96/" + data + "_notexture/tileset.json"}));
-    console.log(data);
   }
 
+  /*
   // HTML overlay for showing feature name on mouseover
   var nameOverlay = document.createElement("div");
   viewer.container.appendChild(nameOverlay);
@@ -79,7 +83,9 @@
   var clickHandler = viewer.screenSpaceEventHandler.getInputAction(
     Cesium.ScreenSpaceEventType.LEFT_CLICK
   );
+  */
   
+  /*
   // If silhouettes are supported, silhouette features in blue on mouse over and silhouette green on mouse click.
   // If silhouettes are not supported, change the feature color to yellow on mouse over and green on mouse click.
   if (
@@ -168,11 +174,11 @@
       viewer.selectedEntity = selectedEntity;
       selectedEntity.description =
         '<table class="cesium-infoBox-defaultTable"><tbody>' +
-        "<tr><th>BIN</th><td>" +
-        pickedFeature.getProperty("ID") +
+        "<tr><th>ID</th><td>" +
+        pickedFeature.getProperty("id") +
         "</td></tr>" +
-        "<tr><th>DOITT ID</th><td>" +
-        pickedFeature.getProperty("DOITT_ID") +
+        "<tr><th>property</th><td>" +
+        pickedFeature.getProperty("property") +
         "</td></tr>" +
         "<tr><th>SOURCE ID</th><td>" +
         pickedFeature.getProperty("SOURCE_ID") +
@@ -291,5 +297,6 @@
     },
     Cesium.ScreenSpaceEventType.LEFT_CLICK);
   }
+  */
   
   
