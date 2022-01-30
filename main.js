@@ -22,9 +22,38 @@
     endTransform: Cesium.Matrix4.IDENTITY,
   });
   
-  // Load the TOKYO Tiyodaku buildings tileset
-  viewer.scene.primitives.add(new Cesium.Cesium3DTileset({url:"https://tokyo-digitaltwin.s3.ap-northeast-1.amazonaws.com/testdata/cesium-ion-test/3d-buildings/plateau-buildings/tileset.json"}));
-  
+  // Load the TOKYO buildings tileset
+  var datasets = [
+      "13101_chiyoda-ku",
+      "13102_chuo-ku",
+      "13103_minato-ku",
+      "13104_shinjuku-ku",
+      "13105_bunkyo-ku",
+      "13106_taito-ku",
+      "13107_sumida-ku",
+      "13108_koto-ku",
+      "13109_shinagawa-ku",
+      "13110_meguro-ku",
+      "13111_ota-ku",
+      "13112_setagaya-ku",
+      "13113_shibuya-ku",
+      "13114_nakano-ku",
+      "13115_suginami-ku",
+      "13116_toshima-ku",
+      "13117_kita-ku",
+      "13118_arakawa-ku",
+      "13119_itabashi-ku",
+      "13120_nerima-ku",
+      "13121_adachi-ku",
+      "13122_katsushika-ku",
+      "13123_edogawa-ku"
+  ];
+
+  for (data of datasets){
+    viewer.scene.primitives.add(new Cesium.Cesium3DTileset({url:"https://s3-ap-northeast-1.amazonaws.com/3dimension.jp/13000_tokyo-egm96/" + data + "_notexture/tileset.json"}));
+    console.log(data);
+  }
+
   // HTML overlay for showing feature name on mouseover
   var nameOverlay = document.createElement("div");
   viewer.container.appendChild(nameOverlay);
@@ -132,7 +161,7 @@
       silhouetteGreen.selected = [pickedFeature];
   
       // Set feature infobox description
-      var featureName = pickedFeature.getProperty("name");
+      var featureName = pickedFeature.getProperty("id");
       selectedEntity.name = featureName;
       selectedEntity.description =
         'Loading <div class="cesium-infoBox-loading"></div>';
@@ -140,7 +169,7 @@
       selectedEntity.description =
         '<table class="cesium-infoBox-defaultTable"><tbody>' +
         "<tr><th>BIN</th><td>" +
-        pickedFeature.getProperty("BIN") +
+        pickedFeature.getProperty("ID") +
         "</td></tr>" +
         "<tr><th>DOITT ID</th><td>" +
         pickedFeature.getProperty("DOITT_ID") +
